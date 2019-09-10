@@ -3,28 +3,35 @@ package ar.edu.unahur.obj2.tp1;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cancion implements Comparable<Cancion>{
+public class Cancion implements Comparable<Cancion>,Reproducible{
     private String titulo;
-    private int duracion;
-    private String nombreAutor;
+    private float duracion;
+    private Artista artista;
+    private Genero genero;
     public List<Disco> discosPertenece = new ArrayList<>();
+    private int reproducciones = 0;
 
-    public Cancion(String titulo, int duracion, String nombreAutor) {
+    public Cancion(String titulo, float duracion, Artista artista, Genero genero) {
         this.titulo = titulo;
         this.duracion = duracion;
-        this.nombreAutor = nombreAutor;
+        this.artista = artista;
+        this.genero = genero;
     }
 
     public String getTitulo() {
         return titulo;
     }
 
-    public int getDuracion() {
+    public Float getDuracion() {
         return duracion;
     }
 
-    public String getNombreAutor() {
-        return nombreAutor;
+    public Artista getNombreDeArtista() {
+        return artista;
+    }
+
+    public Genero getGenero() {
+        return genero;
     }
 
     public List<Disco> getDiscos() {
@@ -33,28 +40,25 @@ public class Cancion implements Comparable<Cancion>{
 
     public void agregarDiscos(Disco disco) {
         discosPertenece.add(disco);
-
     }
 
     public int compareTo(Cancion c) {
-        int r;
-        r = getTitulo().compareTo(c.getTitulo());
-        if(r==0){
-            r = getTitulo().compareTo(c.getTitulo());
-        }
-        return r;
-
+      return this.titulo.compareTo(c.getTitulo());
     }
 
+    @Override
+    public void reproducir() {
+        reproducciones++;
+    }
 
-
+    public int getReproducciones() {
+        return reproducciones;
+    }
     @Override
     public String toString() {
         return "Cancion{" +
                 "titulo='" + titulo + '\'' +
-                ", duracion=" + duracion +
-                ", nombreAutor='" + nombreAutor + '\'' +
-                ", discosPertenece=" + discosPertenece +
+                ", genero=" + genero +
                 '}';
     }
 }
